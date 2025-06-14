@@ -19,7 +19,7 @@ const Index = () => {
             </div>
             <div>
               <h1 className="text-2xl font-bold text-gray-900">Indian Income Tax Calculator</h1>
-              <p className="text-gray-600">Compare Old vs New Tax Regime (AY 2024-25)</p>
+              <p className="text-gray-600">Compare Old vs New Tax Regime (AY 2025-26)</p>
             </div>
           </div>
         </div>
@@ -52,20 +52,24 @@ const Index = () => {
         {/* Info Section */}
         <div className="mt-12 bg-gradient-to-r from-blue-600 to-green-600 rounded-2xl p-8 text-white">
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">About Indian Tax Regimes</h3>
+            <h3 className="text-2xl font-bold mb-4">Updated Tax Slabs for AY 2025-26</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-white/10 rounded-lg p-4">
                 <h4 className="font-semibold mb-2">Old Tax Regime</h4>
-                <p className="text-sm opacity-90">
+                <p className="text-sm opacity-90 mb-2">
                   Higher tax rates but allows various deductions under sections like 80C, 80D, etc.
-                  Suitable for those with significant investments and deductions.
+                </p>
+                <p className="text-xs opacity-80">
+                  Standard Deduction: ₹50,000 | Rebate: ₹12,500 (up to ₹5L income)
                 </p>
               </div>
               <div className="bg-white/10 rounded-lg p-4">
                 <h4 className="font-semibold mb-2">New Tax Regime</h4>
-                <p className="text-sm opacity-90">
-                  Lower tax rates but limited deductions allowed.
-                  Beneficial for those with fewer investments and deductions.
+                <p className="text-sm opacity-90 mb-2">
+                  Lower tax rates with increased rebate but limited deductions allowed.
+                </p>
+                <p className="text-xs opacity-80">
+                  Standard Deduction: ₹75,000 | Rebate: ₹60,000 (up to ₹12L income)
                 </p>
               </div>
             </div>

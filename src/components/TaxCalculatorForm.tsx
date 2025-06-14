@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { SalaryDetails, Deductions, TaxCalculationResult } from '@/types/tax';
 import { calculateTax } from '@/utils/taxCalculations';
 
@@ -12,6 +13,7 @@ interface TaxCalculatorFormProps {
 }
 
 const TaxCalculatorForm = ({ onCalculate }: TaxCalculatorFormProps) => {
+  const [age, setAge] = useState<number>(25);
   const [salaryDetails, setSalaryDetails] = useState<SalaryDetails>({
     basicSalary: 0,
     da: 0,
@@ -43,12 +45,34 @@ const TaxCalculatorForm = ({ onCalculate }: TaxCalculatorFormProps) => {
   };
 
   const handleCalculate = () => {
-    const results = calculateTax(salaryDetails, deductions);
+    const results = calculateTax(salaryDetails, deductions, age);
     onCalculate(results);
   };
 
   return (
     <div className="space-y-6">
+      {/* Personal Details */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Personal Details</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div>
+            <Label htmlFor="age">Age Category</Label>
+            <Select value={age.toString()} onValueChange={(value) => setAge(parseInt(value))}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select age category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="25">Below 60 years</SelectItem>
+                <SelectItem value="65">60-80 years (Senior Citizen)</SelectItem>
+                <SelectItem value="85">Above 80 years (Super Senior Citizen)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Salary Details */}
       <Card>
         <CardHeader>
