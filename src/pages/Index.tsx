@@ -1,5 +1,6 @@
+
 import { useState } from 'react';
-import { Calculator, TrendingUp } from 'lucide-react';
+import { Calculator, TrendingUp, Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TaxCalculatorForm from '@/components/TaxCalculatorForm';
 import TaxComparison from '@/components/TaxComparison';
@@ -24,12 +25,20 @@ const Index = () => {
                 <p className="text-gray-600">Compare Old vs New Tax Regime (AY 2025-26)</p>
               </div>
             </div>
-            <Link to="/sip-calculator">
-              <Button variant="outline" className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4" />
-                SIP Calculator
-              </Button>
-            </Link>
+            <div className="flex gap-2">
+              <Link to="/sip-calculator">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4" />
+                  SIP Calculator
+                </Button>
+              </Link>
+              <Link to="/home-loan-calculator">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Home className="w-4 h-4" />
+                  Home Loan
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
