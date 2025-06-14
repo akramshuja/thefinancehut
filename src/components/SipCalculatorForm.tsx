@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -111,7 +110,9 @@ const SipCalculatorForm = ({ onCalculate }: SipCalculatorFormProps) => {
       <Card>
         <CardHeader>
           <CardTitle>Existing Investment</CardTitle>
-          <CardDescription>Do you have any existing investment to include?</CardDescription>
+          <CardDescription>
+            Include your current investment that will continue to grow alongside new investments
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center space-x-2">
@@ -128,7 +129,7 @@ const SipCalculatorForm = ({ onCalculate }: SipCalculatorFormProps) => {
           {formData.hasExistingInvestment && (
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="existingAmount">Current Value (₹)</Label>
+                <Label htmlFor="existingAmount">Current Investment Value (₹)</Label>
                 <Input
                   id="existingAmount"
                   type="number"
@@ -138,14 +139,17 @@ const SipCalculatorForm = ({ onCalculate }: SipCalculatorFormProps) => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="existingDuration">Duration to Goal (Years)</Label>
+                <Label htmlFor="existingDuration">Growth Period (Years)</Label>
                 <Input
                   id="existingDuration"
                   type="number"
                   value={formData.existingDuration}
                   onChange={(e) => updateFormData('existingDuration', parseInt(e.target.value) || 0)}
-                  placeholder="Years until you need the money"
+                  placeholder="How long will it grow? (leave 0 for same as new investment)"
                 />
+                <p className="text-xs text-gray-500">
+                  Leave as 0 to use the same duration as your new investment
+                </p>
               </div>
             </div>
           )}

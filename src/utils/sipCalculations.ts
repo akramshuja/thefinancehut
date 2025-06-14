@@ -14,6 +14,7 @@ export const calculateSIP = (formData: SipFormData): SipResult => {
   } = formData;
 
   const monthlyRate = expectedReturn / 100 / 12;
+  const annualRate = expectedReturn / 100;
   const totalMonths = duration * 12;
   
   let totalInvestment = 0;
@@ -26,23 +27,29 @@ export const calculateSIP = (formData: SipFormData): SipResult => {
   } else {
     totalInvestment = lumpSumAmount;
     // Lump Sum Future Value Formula: P * (1 + r)^n
-    futureValue = lumpSumAmount * Math.pow(1 + (expectedReturn / 100), duration);
+    futureValue = lumpSumAmount * Math.pow(1 + annualRate, duration);
   }
   
   const wealth = futureValue - totalInvestment;
   
   // Calculate existing investment value if applicable
   let existingValue = 0;
+  let totalExistingInvestment = 0;
   if (hasExistingInvestment && existingAmount > 0) {
-    existingValue = existingAmount * Math.pow(1 + (expectedReturn / 100), existingDuration);
+    // Use existingDuration if provided, otherwise use the same duration as new investment
+    const growthPeriod = existingDuration > 0 ? existingDuration : duration;
+    existingValue = existingAmount * Math.pow(1 + annualRate, growthPeriod);
+    totalExistingInvestment = existingAmount;
   }
   
   const totalFutureValue = futureValue + existingValue;
+  const totalInvestedAmount = totalInvestment + totalExistingInvestment;
+  const totalWealth = totalFutureValue - totalInvestedAmount;
   
   return {
-    totalInvestment,
-    futureValue,
-    wealth,
+    totalInvestment: totalInvestedAmount,
+    futureValue: totalFutureValue,
+    wealth: totalWealth,
     monthlyAmount: investmentType === 'sip' ? monthlyAmount : 0,
     lumpSumAmount: investmentType === 'lumpsum' ? lumpSumAmount : 0,
     existingValue,
