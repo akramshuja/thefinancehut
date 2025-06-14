@@ -51,7 +51,7 @@ export const calculateHomeLoan = (inputs: HomeLoanInputs): HomeLoanResults => {
 };
 
 const calculatePrepaymentScenario = (inputs: HomeLoanInputs) => {
-  const { loanAmount, interestRate, tenureYears, prepaymentAmount = 0 } = inputs;
+  const { loanAmount, interestRate, tenureYears, prepaymentAmount = 0, prepaymentStartMonth = 12 } = inputs;
   const monthlyRate = interestRate / (12 * 100);
   const totalMonths = tenureYears * 12;
   
@@ -59,14 +59,22 @@ const calculatePrepaymentScenario = (inputs: HomeLoanInputs) => {
   const monthlyEmi = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalMonths) / 
     (Math.pow(1 + monthlyRate, totalMonths) - 1);
   
+  // Calculate outstanding balance at prepayment month
+  let outstandingBalance = loanAmount;
+  for (let month = 1; month < prepaymentStartMonth; month++) {
+    const interestPayment = outstandingBalance * monthlyRate;
+    const principalPayment = monthlyEmi - interestPayment;
+    outstandingBalance -= principalPayment;
+  }
+  
   // Scenario 1: Reduce EMI (keep same tenure)
-  const newLoanAmount = loanAmount - prepaymentAmount;
-  const newEmi = newLoanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalMonths) / 
-    (Math.pow(1 + monthlyRate, totalMonths) - 1);
+  const newLoanAmount = outstandingBalance - prepaymentAmount;
+  const remainingMonths = totalMonths - prepaymentStartMonth + 1;
+  const newEmi = newLoanAmount * monthlyRate * Math.pow(1 + monthlyRate, remainingMonths) / 
+    (Math.pow(1 + monthlyRate, remainingMonths) - 1);
   
   // Scenario 2: Reduce tenure (keep same EMI)
-  // Calculate remaining tenure with prepayment
-  let balance = loanAmount - prepaymentAmount;
+  let balance = outstandingBalance - prepaymentAmount;
   let months = 0;
   
   while (balance > 0 && months < totalMonths * 2) {
@@ -76,15 +84,18 @@ const calculatePrepaymentScenario = (inputs: HomeLoanInputs) => {
     months++;
   }
   
+  // Calculate savings
   const originalTotalAmount = monthlyEmi * totalMonths;
-  const newTotalAmount = (monthlyEmi * months) + prepaymentAmount;
+  const prepaidMonthsAmount = monthlyEmi * (prepaymentStartMonth - 1);
+  const remainingMonthsAmount = (monthlyEmi * months) + prepaymentAmount;
+  const newTotalAmount = prepaidMonthsAmount + remainingMonthsAmount;
   const totalSavings = originalTotalAmount - newTotalAmount;
   const interestSaved = totalSavings;
-  const timeReduced = totalMonths - months;
+  const timeReduced = (totalMonths - prepaymentStartMonth + 1) - months;
   
   return {
     newEmi,
-    newTenure: months / 12,
+    newTenure: (prepaymentStartMonth - 1 + months) / 12,
     totalSavings,
     interestSaved,
     timeReduced: timeReduced / 12

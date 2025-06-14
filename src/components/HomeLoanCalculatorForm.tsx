@@ -17,6 +17,7 @@ const HomeLoanCalculatorForm = ({ onCalculate }: HomeLoanCalculatorFormProps) =>
     interestRate: 8.5,
     tenureYears: 20,
     prepaymentAmount: 0,
+    prepaymentStartMonth: 12,
     extraEmiCount: 0,
   });
 
@@ -84,18 +85,33 @@ const HomeLoanCalculatorForm = ({ onCalculate }: HomeLoanCalculatorFormProps) =>
           
           <TabsContent value="prepayment" className="space-y-4 mt-6">
             <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="prepaymentAmount">Prepayment Amount (₹)</Label>
-                <Input
-                  id="prepaymentAmount"
-                  type="number"
-                  value={formData.prepaymentAmount || ''}
-                  onChange={(e) => handleInputChange('prepaymentAmount', e.target.value)}
-                  placeholder="5,00,000"
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="prepaymentAmount">Prepayment Amount (₹)</Label>
+                  <Input
+                    id="prepaymentAmount"
+                    type="number"
+                    value={formData.prepaymentAmount || ''}
+                    onChange={(e) => handleInputChange('prepaymentAmount', e.target.value)}
+                    placeholder="5,00,000"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="prepaymentStartMonth">Prepayment Month</Label>
+                  <Input
+                    id="prepaymentStartMonth"
+                    type="number"
+                    min="1"
+                    max={formData.tenureYears * 12}
+                    value={formData.prepaymentStartMonth || ''}
+                    onChange={(e) => handleInputChange('prepaymentStartMonth', e.target.value)}
+                    placeholder="12"
+                  />
+                </div>
               </div>
               <p className="text-sm text-muted-foreground">
-                Enter a lump sum amount you want to prepay to see the impact on your loan.
+                Enter a lump sum amount and the month (1-{formData.tenureYears * 12}) when you want to make the prepayment to see the impact on your loan.
               </p>
             </div>
           </TabsContent>
