@@ -1,9 +1,10 @@
-
 import { useState } from 'react';
-import { Calculator } from 'lucide-react';
+import { Calculator, TrendingUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import TaxCalculatorForm from '@/components/TaxCalculatorForm';
 import TaxComparison from '@/components/TaxComparison';
 import { TaxCalculationResult } from '@/types/tax';
+import { Button } from '@/components/ui/button';
 
 const Index = () => {
   const [taxResults, setTaxResults] = useState<TaxCalculationResult | null>(null);
@@ -13,14 +14,22 @@ const Index = () => {
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-600 rounded-lg">
-              <Calculator className="w-6 h-6 text-white" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-blue-600 rounded-lg">
+                <Calculator className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">Indian Income Tax Calculator</h1>
+                <p className="text-gray-600">Compare Old vs New Tax Regime (AY 2025-26)</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Indian Income Tax Calculator</h1>
-              <p className="text-gray-600">Compare Old vs New Tax Regime (AY 2025-26)</p>
-            </div>
+            <Link to="/sip-calculator">
+              <Button variant="outline" className="flex items-center gap-2">
+                <TrendingUp className="w-4 h-4" />
+                SIP Calculator
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
