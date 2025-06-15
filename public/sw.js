@@ -1,41 +1,35 @@
 
 const CACHE_NAME = 'finance-hut-v1';
 const urlsToCache = [
-  '/thefinancehut/',
-  '/thefinancehut/sip-calculator',
-  '/thefinancehut/home-loan-calculator',
-  '/thefinancehut/manifest.json'
+  `${self.registration.scope}index.html`,
+  `${self.registration.scope}manifest.json`,
+  `${self.registration.scope}icons/icon-192x192.png`,
+  `${self.registration.scope}icons/icon-512x512.png`
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => {
-        return cache.addAll(urlsToCache);
-      })
+      .then((cache) => cache.addAll(urlsToCache))
+      .catch((err) => console.error('Cache install failed:', err))
   );
 });
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
-      .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
-      })
+      .then((response) => response || fetch(event.request))
   );
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys().then((cacheNames) => Promise.all(
+      cacheNames.map((cacheName) => {
+        if (cacheName !== CACHE_NAME) {
+          return caches.delete(cacheName);
+        }
+      })
+    ))
   );
 });
