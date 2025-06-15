@@ -1,11 +1,12 @@
 
 const CACHE_NAME = 'finance-hut-v1';
 const urlsToCache = [
-  '/',
-  '/sip-calculator',
-  '/static/js/bundle.js',
-  '/static/css/main.css',
-  '/manifest.json'
+  '/thefinancehut/',
+  '/thefinancehut/sip-calculator',
+  '/thefinancehut/home-loan-calculator',
+  '/thefinancehut/static/js/bundle.js',
+  '/thefinancehut/static/css/main.css',
+  '/thefinancehut/manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
