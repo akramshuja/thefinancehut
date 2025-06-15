@@ -64,7 +64,7 @@ const Index = () => {
                   <Calculator className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-4 opacity-50" />
                   <p className="text-sm md:text-base">Fill in your details to see tax calculations</p>
                 </div>
-              )}
+              </div>
             )}
           </div>
         </div>
