@@ -4,8 +4,6 @@ const urlsToCache = [
   '/thefinancehut/',
   '/thefinancehut/sip-calculator',
   '/thefinancehut/home-loan-calculator',
-  '/thefinancehut/static/js/bundle.js',
-  '/thefinancehut/static/css/main.css',
   '/thefinancehut/manifest.json'
 ];
 
