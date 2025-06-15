@@ -12,19 +12,19 @@
   "icons": [
     {
       "src": "/thefinancehut/favicon.ico",
-      "sizes": "48x48",
+      "sizes": "16x16 32x32 48x48",
       "type": "image/x-icon"
     },
     {
-      "src": "/thefinancehut/placeholder.svg",
+      "src": "/thefinancehut/favicon.ico",
       "sizes": "192x192",
-      "type": "image/svg+xml",
+      "type": "image/x-icon",
       "purpose": "any maskable"
     },
     {
-      "src": "/thefinancehut/placeholder.svg",
+      "src": "/thefinancehut/favicon.ico",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/x-icon",
       "purpose": "any maskable"
     }
   ],
