@@ -18,7 +18,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <PWAInstallPrompt />
-      <BrowserRouter>
+      <BrowserRouter basename="/thefinancehut/">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/sip-calculator" element={<SipCalculator />} />
