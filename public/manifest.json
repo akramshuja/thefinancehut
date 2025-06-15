@@ -3,25 +3,26 @@
   "name": "The Finance Hut - Tax & Investment Calculator",
   "short_name": "Finance Hut",
   "description": "Indian Income Tax Calculator and SIP Investment Calculator",
-  "start_url": "/",
+  "start_url": "/thefinancehut/",
+  "scope": "/thefinancehut/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/favicon.ico",
+      "src": "/thefinancehut/favicon.ico",
       "sizes": "48x48",
       "type": "image/x-icon"
     },
     {
-      "src": "/placeholder.svg",
+      "src": "/thefinancehut/placeholder.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "/placeholder.svg",
+      "src": "/thefinancehut/placeholder.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
