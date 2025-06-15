@@ -1,11 +1,8 @@
-
 const CACHE_NAME = 'finance-hut-v1';
 const urlsToCache = [
-  `${self.registration.scope}`,
   `${self.registration.scope}index.html`,
   `${self.registration.scope}manifest.json`,
-  `${self.registration.scope}favicon.ico`,
-  `${self.registration.scope}placeholder.svg`
+  `${self.registration.scope}finance-icon.svg`
 ];
 
 self.addEventListener('install', (event) => {
